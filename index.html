@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080808" />
+  <meta name="description" content="Catálogo premium com rolagem dirigida e estética inspirada em lançamentos de tecnologia." />
+  <title>Monjaros — Catálogo Premium</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="progress"><span id="progressBar"></span></div>
+
+  <header class="glass-nav">
+    <a href="#inicio" class="brand">MONJAROS<span>®</span></a>
+    <nav class="nav-links">
+      <a href="#experiencia">Experiência</a>
+      <a href="#produtos">Catálogo</a>
+      <a href="#final">Contato</a>
+    </nav>
+    <button class="nav-cta" id="menuBtn">Explorar</button>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-orbit orbit-a"></div>
+      <div class="hero-orbit orbit-b"></div>
+
+      <div class="hero-center">
+        <p class="eyebrow">CATÁLOGO PRIVADO — EDIÇÃO 01</p>
+        <h1>Escolher bem também<br><em>é uma forma de poder.</em></h1>
+        <p class="hero-sub">
+          Uma experiência visual guiada, criada para apresentar cada escolha com mais presença, ritmo e intenção.
+        </p>
+        <div class="hero-actions">
+          <a href="#experiencia" class="primary-btn">Descobrir</a>
+          <a href="#produtos" class="secondary-btn">Ver catálogo</a>
+        </div>
+      </div>
+
+      <div class="hero-device">
+        <div class="device-glow"></div>
+        <div class="device-frame">
+          <div class="device-screen scale-screen" aria-label="Indicador visual de peso controlado pela rolagem">
+            <div class="scale-header">
+              <span class="device-eyebrow">EVOLUÇÃO VISUAL</span>
+              <span class="scale-status"><i></i> SCROLL ATIVO</span>
+            </div>
+
+            <div class="weight-readout">
+              <span class="weight-number" id="weightNumber">112,8</span>
+              <span class="weight-unit">kg</span>
+            </div>
+
+            <div class="weight-track" aria-hidden="true">
+              <div class="weight-track-fill" id="weightTrackFill"></div>
+              <div class="weight-marker" id="weightMarker"></div>
+            </div>
+
+            <div class="weight-footer">
+              <span>INÍCIO <strong>112,8 kg</strong></span>
+              <span>PROJEÇÃO <strong>84,6 kg</strong></span>
+            </div>
+
+            <small class="scale-caption">ROLE PARA ACOMPANHAR A CONTAGEM</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-hint">
+        <span>Role para explorar</span>
+        <i></i>
+      </div>
+    </section>
+
+    <section class="experience" id="experiencia">
+      <div class="section-heading centered">
+        <p class="eyebrow light">UMA EXPERIÊNCIA EM CAMADAS</p>
+        <h2>Menos ruído.<br>Mais direção.</h2>
+        <p>
+          Em vez de exibir tudo ao mesmo tempo, o site conduz o olhar e cria espaço para cada produto respirar.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card feature-wide">
+          <div class="card-copy">
+            <span>01</span>
+            <h3>Rolagem dirigida</h3>
+            <p>As seções entram no ritmo certo, sem espaços excessivos e sem perder impacto.</p>
+          </div>
+          <div class="card-visual motion-lines"></div>
+        </article>
+
+        <article class="feature-card">
+          <div class="card-copy">
+            <span>02</span>
+            <h3>Profundidade</h3>
+            <p>Glassmorphism, reflexos e luzes discretas criam uma atmosfera mais premium.</p>
+          </div>
+          <div class="mini-orb"></div>
+        </article>
+
+        <article class="feature-card">
+          <div class="card-copy">
+            <span>03</span>
+            <h3>Foco no produto</h3>
+            <p>Imagem, nome e preço aparecem de forma limpa e centralizada.</p>
+          </div>
+          <div class="mini-stage">
+            <div class="mini-pack"></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="banner-section">
+      <div class="banner banner-dark">
+        <div class="banner-copy">
+          <p class="eyebrow light">APRESENTAÇÃO CINEMATOGRÁFICA</p>
+          <h2>O catálogo deixa de ser uma lista<br>e passa a ser uma experiência.</h2>
+          <p>Cada bloco foi desenhado como uma peça visual independente, mas conectado ao próximo.</p>
+        </div>
+        <div class="banner-shape shape-one"></div>
+        <div class="banner-shape shape-two"></div>
+      </div>
+    </section>
+
+    <section class="catalog-intro">
+      <div class="section-heading centered compact">
+        <p class="eyebrow">SELEÇÃO PRINCIPAL</p>
+        <h2>Escolha no seu tempo.</h2>
+        <p>Cada produto ocupa a tela, gira conforme a rolagem e revela suas informações com calma.</p>
+      </div>
+    </section>
+
+    <section class="products" id="produtos"></section>
+
+    <section class="banner-section">
+      <div class="banner banner-light">
+        <div class="banner-copy dark-copy">
+          <p class="eyebrow">PERSONALIZAÇÃO SIMPLES</p>
+          <h2>Troque imagens, nomes e preços<br>sem mexer na estrutura.</h2>
+          <p>Use a pasta <code>assets/products</code> e o arquivo <code>products.js</code>.</p>
+        </div>
+        <div class="glass-panel">
+          <span>assets/products</span>
+          <strong>PNG • JPG • WEBP</strong>
+          <small>fundos transparentes funcionam melhor</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="finale" id="final">
+      <div class="final-glow"></div>
+      <div class="section-heading centered">
+        <p class="eyebrow light">FIM DA EXPERIÊNCIA</p>
+        <h2>Uma escolha bem apresentada<br><em>muda a percepção.</em></h2>
+        <p>Protótipo pronto para receber suas imagens e últimos ajustes de conteúdo.</p>
+        <a href="#inicio" class="primary-btn">Recomeçar</a>
+      </div>
+    </section>
+  </main>
+
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <button id="closeDrawer">FECHAR</button>
+    <nav>
+      <a href="#inicio">Início <span>00</span></a>
+      <a href="#experiencia">Experiência <span>01</span></a>
+      <a href="#produtos">Produtos <span>02</span></a>
+      <a href="#final">Final <span>03</span></a>
+    </nav>
+  </aside>
+
+  <script src="products.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
