@@ -1,12 +1,101 @@
-const clamp=(n,min,max)=>Math.min(Math.max(n,min),max);
+const clamp=(value,min,max)=>Math.min(Math.max(value,min),max);
+const formatWeight=value=>value.toFixed(1).replace('.',',');
+
 const progressBar=document.getElementById('progressBar');
-const productsRoot=document.getElementById('produtos');
-const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-function renderProducts(){const products=window.PRODUCTS||[];productsRoot.innerHTML=products.map((p,i)=>`<article class="product"><div class="product-panel"><div class="product-visual"><div class="product-glow accent-${esc(p.accent)}"></div><div class="product-stage-ring"></div><div class="product-img-wrap"><img class="product-img" src="${esc(p.image)}" alt="${esc(p.name)}"><div class="image-placeholder"><strong>${esc(p.name.split(' ')[0])}</strong><span>${esc(p.image)}</span></div></div></div><div class="product-copy"><span class="product-index">${String(i+1).padStart(2,'0')} / ${String(products.length).padStart(2,'0')}</span><p class="product-kicker">${esc(p.subtitle)}</p><h3>${esc(p.name)}</h3><div class="product-rating"><span class="product-stars">★★★★★</span><strong>${esc(p.rating)}</strong><span class="product-reviews">(${esc(p.reviews)} avaliações)</span></div><div class="product-price-row"><p class="product-price">${esc(p.price)}</p><span class="product-old-price">${esc(p.oldPrice)}</span></div><p class="product-installment">${esc(p.installment)}</p><p class="product-note">${esc(p.note)}</p><div class="product-meta-row"><span class="product-meta-chip">ENVIO SEGURO</span><span class="product-meta-chip">ATENDIMENTO PREMIUM</span><span class="product-meta-chip">ESTOQUE LIMITADO</span></div></div><div class="product-scroll-label">ROLE PARA GIRAR</div></div></article>`).join('');document.querySelectorAll('.product-img').forEach(img=>{const ph=img.nextElementSibling;img.onload=()=>ph.style.display='none';img.onerror=()=>{img.style.display='none';ph.style.display='flex'}})}
+const weightNumber=document.getElementById('weightNumber');
+const weightFill=document.getElementById('weightFill');
+const weightMarker=document.getElementById('weightMarker');
+const productList=document.getElementById('productList');
+
+function escapeHTML(value=''){
+  return String(value).replace(/[&<>"']/g,char=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'
+  })[char]);
+}
+
+function renderProducts(){
+  const products=window.PRODUCTS||[];
+  productList.innerHTML=products.map((product,index)=>`
+    <article class="product">
+      <div class="product-panel">
+        <div class="product-visual">
+          <div class="product-glow accent-${escapeHTML(product.accent)}"></div>
+          <div class="product-ring"></div>
+          <div class="product-image-wrap">
+            <img class="product-image" src="${escapeHTML(product.image)}" alt="${escapeHTML(product.name)}" loading="lazy">
+            <div class="placeholder">
+              <strong>${escapeHTML(product.name.split(' ')[0])}</strong>
+              <span>${escapeHTML(product.image)}</span>
+            </div>
+          </div>
+        </div>
+        <div class="product-info">
+          <span class="product-index">${String(index+1).padStart(2,'0')} / ${String(products.length).padStart(2,'0')}</span>
+          <p class="product-category">${escapeHTML(product.category)}</p>
+          <h3 class="product-title">${escapeHTML(product.name)}</h3>
+          <div class="rating-row">
+            <span class="stars">★★★★★</span>
+            <strong class="rating">${escapeHTML(product.rating)}</strong>
+            <span class="reviews">(${escapeHTML(product.reviews)})</span>
+          </div>
+          <div class="price-row">
+            <strong class="price">${escapeHTML(product.price)}</strong>
+            <span class="old-price">${escapeHTML(product.oldPrice)}</span>
+          </div>
+          <p class="installment">${escapeHTML(product.installment)}</p>
+          <p class="description">${escapeHTML(product.description)}</p>
+          <div class="chips">
+            <span class="chip">ENVIO SEGURO</span>
+            <span class="chip">ATENDIMENTO PREMIUM</span>
+            <span class="chip">ESTOQUE LIMITADO</span>
+          </div>
+        </div>
+      </div>
+    </article>
+  `).join('');
+
+  document.querySelectorAll('.product-image').forEach(image=>{
+    const placeholder=image.nextElementSibling;
+    image.addEventListener('load',()=>placeholder.hidden=true);
+    image.addEventListener('error',()=>{image.hidden=true;placeholder.hidden=false;});
+  });
+}
+
+function sectionProgress(element){
+  const rect=element.getBoundingClientRect();
+  const scrollable=Math.max(element.offsetHeight-window.innerHeight,1);
+  return clamp(-rect.top/scrollable,0,1);
+}
+
+function update(){
+  const maxScroll=Math.max(document.documentElement.scrollHeight-window.innerHeight,1);
+  progressBar.style.width=`${(window.scrollY/maxScroll)*100}%`;
+
+  const hero=document.querySelector('.hero');
+  const heroRect=hero.getBoundingClientRect();
+  const raw=clamp((-heroRect.top)/(window.innerHeight*.62),0,1);
+  const eased=raw*raw*(3-2*raw);
+  const start=112.8;
+  const end=65;
+  const current=start-(start-end)*eased;
+  weightNumber.textContent=formatWeight(current);
+  weightFill.style.width=`${eased*100}%`;
+  weightMarker.style.left=`${eased*100}%`;
+
+  document.querySelectorAll('.product').forEach(section=>{
+    const progress=sectionProgress(section);
+    const centered=clamp((progress-.16)/.68,0,1);
+    const easedProduct=centered*centered*(3-2*centered);
+    const image=section.querySelector('.product-image-wrap');
+    const ring=section.querySelector('.product-ring');
+    const glow=section.querySelector('.product-glow');
+    image.style.transform=`rotateY(${-44+easedProduct*88}deg) rotateX(${8-Math.sin(easedProduct*Math.PI)*13}deg) scale(${.93+Math.sin(easedProduct*Math.PI)*.09})`;
+    ring.style.transform=`rotateX(70deg) rotateZ(${easedProduct*46}deg)`;
+    glow.style.opacity=String(.22+Math.sin(easedProduct*Math.PI)*.42);
+  });
+}
+
 renderProducts();
-function progress(el){const r=el.getBoundingClientRect();return clamp(-r.top/Math.max(el.offsetHeight-innerHeight,1),0,1)}
-function update(){const doc=document.documentElement;progressBar.style.width=(scrollY/Math.max(doc.scrollHeight-innerHeight,1)*100)+'%';const hero=document.querySelector('.hero');const scale=document.querySelector('.scale-platform');if(hero&&scale){const p=progress(hero);const e=p*p*(3-2*p);scale.style.transform=`translate(-50%,-50%) rotateX(${64-e*8}deg) rotateZ(${-2+e*3}deg) scale(${1+e*.035})`;const start=112.8,end=65;const current=start-(start-end)*e;document.getElementById('weightNumber').textContent=current.toFixed(1).replace('.',',');document.getElementById('weightTrackFill').style.width=(e*100)+'%';document.getElementById('weightMarker').style.left=(e*100)+'%'}document.querySelectorAll('.product').forEach(sec=>{const p=progress(sec);const c=clamp((p-.18)/.64,0,1);const e=c*c*(3-2*c);const wrap=sec.querySelector('.product-img-wrap');const glow=sec.querySelector('.product-glow');const ring=sec.querySelector('.product-stage-ring');wrap.style.transform=`rotateY(${-46+e*92}deg) rotateX(${10-Math.sin(e*Math.PI)*15}deg) translateY(${Math.sin(e*Math.PI*2)*-8}px) scale(${.91+Math.sin(e*Math.PI)*.12})`;glow.style.transform=`scale(${.84+Math.sin(e*Math.PI)*.24})`;ring.style.transform=`rotateX(70deg) rotateZ(${e*48}deg)`})}
-addEventListener('scroll',update,{passive:true});addEventListener('resize',update);update();
-const drawer=document.getElementById('drawer');const setDrawer=o=>{drawer.classList.toggle('open',o);document.body.style.overflow=o?'hidden':''};document.getElementById('menuBtn').onclick=()=>setDrawer(true);document.getElementById('closeDrawer').onclick=()=>setDrawer(false);drawer.querySelectorAll('a').forEach(a=>a.onclick=()=>setDrawer(false));
-const cursor=document.getElementById('cursorGlow');addEventListener('pointermove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'},{passive:true});
-if(matchMedia('(pointer:fine)').matches){let target=scrollY,current=scrollY,running=false;const tick=()=>{current+=(target-current)*.12;scrollTo(0,current);if(Math.abs(target-current)>.5)requestAnimationFrame(tick);else running=false};addEventListener('wheel',e=>{if(e.ctrlKey)return;e.preventDefault();target=clamp(target+e.deltaY*.82,0,document.documentElement.scrollHeight-innerHeight);if(!running){running=true;current=scrollY;requestAnimationFrame(tick)}},{passive:false})}
+window.addEventListener('scroll',update,{passive:true});
+window.addEventListener('resize',update);
+update();
