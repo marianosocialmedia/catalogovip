@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=8.0.0" />
+  <link rel="stylesheet" href="style.css?v=9.0.0" />
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
@@ -44,34 +44,53 @@
         </div>
       </div>
 
-      <div class="hero-device scale-floor-stage">
-        <div class="floor-shadow"></div>
-        <div class="scale-platform" id="scalePlatform">
-          <div class="scale-glass">
-            <div class="scale-topbar">
-              <span class="device-eyebrow">BALANÇA INTERATIVA <b>V8</b></span>
-              <span class="scale-status"><i></i> SCROLL ATIVO</span>
+      <div class="hero-device scale-stage">
+        <div class="floor-plane" aria-hidden="true"></div>
+        <div class="floor-reflection" aria-hidden="true"></div>
+
+        <div class="real-scale">
+          <div class="scale-foot foot-a"></div>
+          <div class="scale-foot foot-b"></div>
+          <div class="scale-foot foot-c"></div>
+          <div class="scale-foot foot-d"></div>
+
+          <div class="scale-body">
+            <div class="sensor sensor-a"></div>
+            <div class="sensor sensor-b"></div>
+            <div class="sensor sensor-c"></div>
+            <div class="sensor sensor-d"></div>
+
+            <div class="scale-display">
+              <div class="scale-topbar">
+                <span class="device-eyebrow">BALANÇA DIGITAL <b>V9</b></span>
+                <span class="scale-status"><i></i> ROLAGEM ATIVA</span>
+              </div>
+              <div class="weight-readout">
+                <span class="weight-number" id="weightNumber">112,8</span>
+                <span class="weight-unit">kg</span>
+              </div>
+              <div class="weight-track">
+                <div class="weight-track-fill" id="weightTrackFill"></div>
+                <div class="weight-marker" id="weightMarker"></div>
+              </div>
+              <div class="weight-footer">
+                <span>INÍCIO <strong>112,8 kg</strong></span>
+                <span>META VISUAL <strong>65,0 kg</strong></span>
+              </div>
             </div>
-            <div class="weight-readout">
-              <span class="weight-number" id="weightNumber">112,8</span>
-              <span class="weight-unit">kg</span>
-            </div>
-            <div class="weight-track">
-              <div class="weight-track-fill" id="weightTrackFill"></div>
-              <div class="weight-marker" id="weightMarker"></div>
-            </div>
-            <div class="weight-footer">
-              <span>INÍCIO <strong>112,8 kg</strong></span>
-              <span>META VISUAL <strong>65,0 kg</strong></span>
-            </div>
-            <small class="scale-caption">ROLE DEVAGAR PARA ACOMPANHAR A TRANSFORMAÇÃO</small>
           </div>
         </div>
       </div>
+
       <div class="scroll-hint">
         <span>Role para explorar</span>
         <i></i>
       </div>
+    </section>
+
+    <section class="depth-transition" aria-hidden="true">
+      <div class="depth-line"></div>
+      <span>PRECISÃO</span><span>CONTROLE</span><span>ESCOLHA</span>
     </section>
 
     <section class="experience" id="experiencia">
@@ -173,7 +192,7 @@
     </nav>
   </aside>
 
-  <script src="products.js?v=8.0.0"></script>
-  <script src="script.js?v=8.0.0"></script>
+  <script src="products.js?v=9.0.0"></script>
+  <script src="script.js?v=9.0.0"></script>
 </body>
 </html>
