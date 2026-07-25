@@ -1,13 +1,16 @@
 window.PRODUCTS = [
   {
-    name: "Produto Premium 01",
+    name: "T.G. Caixa Fechada",
     category: "Seleção principal",
-    price: "R$ 0.000,00",
-    oldPrice: "R$ 0.000,00",
-    installment: "12x de R$ 000,00 sem juros",
+    price: "R$ 1.200,00",
+    oldPrice: "R$ 1.300,00",
+    installment: "18x com acréscimo da maquininha",
     rating: "4,9",
     reviews: "128 avaliações",
-    description: "Descrição curta e objetiva para transmitir segurança, qualidade e valor.",
+    description: "T.G. Ampola
+      R$ 350,00 no dinheiro
+  R$ 400,00 no pix ou cartão de crédito parcelado em até 18x 
+    com acréscimo da maquininha",
     image: "assets/products/produto-01.png",
     accent: "green"
   },
