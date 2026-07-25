@@ -57,3 +57,443 @@ a{color:inherit}
 :focus-visible{outline:2px solid #8aa0ff;outline-offset:4px}
 @media(max-width:900px){.desktop-nav{display:none}.glass-nav{width:calc(100% - 24px)}.hero{min-height:94vh;padding:100px 22px 22px}.hero h1{font-size:47px}.hero-sub{max-width:340px}.scale-stage{height:225px}.scale{width:94%;bottom:18px;padding:21px 22px}.weight-line{margin:28px 0 22px}.weight-number{font-size:58px}.trust-strip{justify-content:flex-start;gap:24px;padding-inline:22px}.experience{padding:60px 20px 48px}.feature-grid{grid-template-columns:1fr;margin-top:38px}.feature-large{grid-row:auto;min-height:500px}.feature-card{min-height:290px}.premium-banner{margin:0 16px 46px;padding:34px 26px;min-height:450px;border-radius:28px}.banner-glass{opacity:.58}.catalog-intro{padding:56px 22px 24px}.product{min-height:165vh;padding:0 12px 18px}.product-panel{top:76px;min-height:calc(100vh - 90px);padding:20px;grid-template-rows:47vh auto;border-radius:28px}.product-visual{height:47vh;min-height:0}.product-image-wrap{width:min(74%,340px);height:min(82%,340px)}.placeholder{width:170px;height:235px;padding:18px}.placeholder strong{font-size:34px}.product-title{font-size:36px}.price{font-size:38px}.description{font-size:13px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+
+/* ==========================================================
+   V13 — CATÁLOGO PREMIUM EDITÁVEL
+   ========================================================== */
+
+.catalog-intro{
+  padding-bottom:42px;
+  background:
+    radial-gradient(circle at 50% 0,rgba(113,127,255,.10),transparent 28%),
+    #f1efe9;
+}
+
+.product-list{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:24px;
+  max-width:1220px;
+  margin:0 auto;
+  padding:0 5vw 110px;
+  background:#f1efe9;
+}
+
+.product-list::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(30,31,37,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(30,31,37,.035) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.36),transparent 82%);
+}
+
+.catalog-card{
+  --tilt-x:0deg;
+  --tilt-y:0deg;
+  --light-x:50%;
+  --light-y:30%;
+  position:relative;
+  min-width:0;
+  border:1px solid rgba(24,24,29,.08);
+  border-radius:34px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at var(--light-x) var(--light-y),rgba(255,255,255,.95),transparent 30%),
+    linear-gradient(145deg,#fbfaf7,#e4e1d9);
+  color:#121216;
+  box-shadow:
+    0 34px 84px rgba(42,39,33,.11),
+    inset 0 1px 0 rgba(255,255,255,.95);
+  opacity:0;
+  transform:
+    perspective(1200px)
+    rotateY(var(--tilt-x))
+    rotateX(var(--tilt-y))
+    translateY(36px);
+  transition:
+    opacity .75s ease,
+    transform .75s cubic-bezier(.2,.8,.2,1),
+    box-shadow .35s ease,
+    border-color .35s ease;
+  isolation:isolate;
+}
+
+.catalog-card.is-visible{
+  opacity:1;
+  transform:
+    perspective(1200px)
+    rotateY(var(--tilt-x))
+    rotateX(var(--tilt-y))
+    translateY(0);
+}
+
+.catalog-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:5;
+  pointer-events:none;
+  border-radius:inherit;
+  background:linear-gradient(125deg,rgba(255,255,255,.42),transparent 22%,transparent 76%,rgba(255,255,255,.18));
+  mix-blend-mode:soft-light;
+}
+
+@media(hover:hover){
+  .catalog-card:hover{
+    border-color:rgba(72,80,147,.18);
+    box-shadow:
+      0 44px 110px rgba(42,39,33,.18),
+      inset 0 1px 0 rgba(255,255,255,.98);
+  }
+}
+
+.catalog-card-media{
+  position:relative;
+  min-height:420px;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.56),rgba(255,255,255,.15)),
+    rgba(255,255,255,.28);
+}
+
+.catalog-card-media::before{
+  content:"";
+  position:absolute;
+  inset:16px;
+  border:1px solid rgba(255,255,255,.72);
+  border-radius:24px;
+  pointer-events:none;
+}
+
+.catalog-card-topline{
+  position:absolute;
+  top:26px;
+  left:28px;
+  right:28px;
+  z-index:4;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.catalog-badge{
+  display:inline-flex;
+  align-items:center;
+  min-height:28px;
+  padding:0 12px;
+  border:1px solid rgba(20,20,26,.08);
+  border-radius:999px;
+  background:rgba(255,255,255,.62);
+  backdrop-filter:blur(14px);
+  color:#5f5a54;
+  font-size:8px;
+  font-weight:600;
+  letter-spacing:.17em;
+}
+
+.catalog-position{
+  color:rgba(23,23,28,.36);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.22em;
+}
+
+.catalog-card-aura{
+  position:absolute;
+  width:390px;
+  height:390px;
+  border-radius:50%;
+  filter:blur(30px);
+  opacity:.42;
+}
+
+.accent-blue{background:radial-gradient(circle,rgba(84,112,255,.36),transparent 65%)}
+.accent-violet{background:radial-gradient(circle,rgba(137,84,225,.32),transparent 65%)}
+.accent-gold{background:radial-gradient(circle,rgba(214,168,62,.30),transparent 65%)}
+.accent-cyan{background:radial-gradient(circle,rgba(41,161,188,.30),transparent 65%)}
+.accent-rose{background:radial-gradient(circle,rgba(212,95,143,.28),transparent 65%)}
+.accent-emerald{background:radial-gradient(circle,rgba(54,155,119,.28),transparent 65%)}
+
+.catalog-product-image{
+  position:relative;
+  z-index:3;
+  width:min(72%,420px);
+  height:320px;
+  display:grid;
+  place-items:center;
+  transition:transform .55s cubic-bezier(.2,.8,.2,1);
+}
+
+@media(hover:hover){
+  .catalog-card:hover .catalog-product-image{
+    transform:translateY(-8px) scale(1.025);
+  }
+}
+
+.catalog-product-image img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 34px 28px rgba(42,39,33,.23));
+}
+
+.catalog-placeholder{
+  width:230px;
+  min-height:270px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:28px;
+  border:1px dashed rgba(31,31,37,.18);
+  border-radius:26px;
+  background:rgba(255,255,255,.42);
+  text-align:center;
+}
+
+.catalog-placeholder strong{
+  font-family:"Playfair Display",serif;
+  font-size:32px;
+  line-height:1;
+  letter-spacing:-.035em;
+}
+
+.catalog-placeholder span{
+  margin-top:22px;
+  color:#7b756d;
+  font-size:10px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+
+.catalog-placeholder code{
+  margin-top:8px;
+  color:#55504a;
+  font-size:10px;
+}
+
+.catalog-reflection{
+  position:absolute;
+  left:50%;
+  bottom:42px;
+  width:46%;
+  height:48px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:radial-gradient(ellipse,rgba(42,39,33,.16),transparent 67%);
+  filter:blur(14px);
+}
+
+.catalog-card-body{
+  position:relative;
+  z-index:3;
+  padding:30px 32px 34px;
+  border-top:1px solid rgba(28,28,34,.07);
+  background:rgba(250,249,246,.80);
+  backdrop-filter:blur(20px);
+}
+
+.catalog-meta-line{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  color:#777168;
+  font-size:9px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.catalog-stock{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  color:#5c665e;
+}
+
+.catalog-stock i{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#5b9d70;
+  box-shadow:0 0 10px rgba(91,157,112,.48);
+}
+
+.catalog-card-body h3{
+  margin:18px 0 12px;
+  font-family:"Playfair Display",serif;
+  font-size:clamp(34px,3.6vw,52px);
+  line-height:.94;
+  letter-spacing:-.045em;
+}
+
+.catalog-specs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:16px;
+}
+
+.catalog-specs span{
+  padding:8px 11px;
+  border:1px solid rgba(23,23,29,.08);
+  border-radius:999px;
+  background:rgba(255,255,255,.62);
+  color:#69635c;
+  font-size:9px;
+  letter-spacing:.10em;
+}
+
+.catalog-rating{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:18px;
+  color:#746e66;
+  font-size:12px;
+}
+
+.catalog-rating .stars{
+  color:#e2a129;
+  font-size:13px;
+  letter-spacing:.055em;
+}
+
+.catalog-rating strong{
+  color:#29272a;
+}
+
+.catalog-description{
+  min-height:48px;
+  margin:0;
+  color:#706a62;
+  font-size:13px;
+  line-height:1.65;
+}
+
+.catalog-price-block{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  margin-top:24px;
+  padding-top:22px;
+  border-top:1px solid rgba(23,23,29,.07);
+}
+
+.catalog-old-price{
+  color:#9a948c;
+  font-size:12px;
+  text-decoration:line-through;
+}
+
+.catalog-price{
+  margin-top:4px;
+  font-family:"Playfair Display",serif;
+  font-size:clamp(34px,4vw,50px);
+  line-height:1;
+  letter-spacing:-.045em;
+}
+
+.catalog-installment{
+  margin-top:7px;
+  color:#6f6961;
+  font-size:12px;
+}
+
+.catalog-action{
+  width:100%;
+  min-height:50px;
+  margin-top:24px;
+  padding:0 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border:0;
+  border-radius:16px;
+  background:#111116;
+  color:#fff;
+  font:500 10px/1 "DM Sans",sans-serif;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:transform .25s ease,background .25s ease;
+}
+
+.catalog-action i{
+  font-size:17px;
+  font-style:normal;
+  transition:transform .25s ease;
+}
+
+@media(hover:hover){
+  .catalog-action:hover{
+    transform:translateY(-2px);
+    background:#22222a;
+  }
+
+  .catalog-action:hover i{
+    transform:translate(3px,-3px);
+  }
+}
+
+@media(max-width:880px){
+  .product-list{
+    grid-template-columns:1fr;
+    gap:18px;
+    padding:0 16px 74px;
+  }
+
+  .catalog-card{
+    border-radius:28px;
+  }
+
+  .catalog-card-media{
+    min-height:350px;
+  }
+
+  .catalog-product-image{
+    height:260px;
+  }
+
+  .catalog-card-body{
+    padding:26px 24px 28px;
+  }
+
+  .catalog-card-body h3{
+    font-size:38px;
+  }
+}
+
+@media(max-width:520px){
+  .catalog-card-media{
+    min-height:310px;
+  }
+
+  .catalog-product-image{
+    width:82%;
+    height:225px;
+  }
+
+  .catalog-placeholder{
+    width:200px;
+    min-height:220px;
+  }
+
+  .catalog-card-topline{
+    top:20px;
+    left:20px;
+    right:20px;
+  }
+
+  .catalog-card-body{
+    padding:24px 20px 24px;
+  }
+}
