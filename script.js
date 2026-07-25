@@ -15,49 +15,76 @@ function escapeHTML(value=''){
 
 function renderProducts(){
   const products=window.PRODUCTS||[];
+
   productList.innerHTML=products.map((product,index)=>`
-    <article class="product">
-      <div class="product-panel">
-        <div class="product-visual">
-          <div class="product-glow accent-${escapeHTML(product.accent)}"></div>
-          <div class="product-ring"></div>
-          <div class="product-image-wrap">
-            <img class="product-image" src="${escapeHTML(product.image)}" alt="${escapeHTML(product.name)}" loading="lazy">
-            <div class="placeholder">
-              <strong>${escapeHTML(product.name.split(' ')[0])}</strong>
-              <span>${escapeHTML(product.image)}</span>
-            </div>
+    <article class="catalog-card" data-product="${index}">
+      <div class="catalog-card-media">
+        <div class="catalog-card-aura accent-${escapeHTML(product.accent)}"></div>
+
+        <div class="catalog-card-topline">
+          <span class="catalog-badge">${escapeHTML(product.badge||'SELEÇÃO')}</span>
+          <span class="catalog-position">${String(index+1).padStart(2,'0')}</span>
+        </div>
+
+        <div class="catalog-product-image">
+          <img src="${escapeHTML(product.image)}" alt="${escapeHTML(product.name)}" loading="lazy">
+          <div class="catalog-placeholder">
+            <strong>${escapeHTML(product.name)}</strong>
+            <span>adicione a imagem em</span>
+            <code>${escapeHTML(product.image)}</code>
           </div>
         </div>
-        <div class="product-info">
-          <span class="product-index">${String(index+1).padStart(2,'0')} / ${String(products.length).padStart(2,'0')}</span>
-          <p class="product-category">${escapeHTML(product.category)}</p>
-          <h3 class="product-title">${escapeHTML(product.name)}</h3>
-          <div class="rating-row">
-            <span class="stars">★★★★★</span>
-            <strong class="rating">${escapeHTML(product.rating)}</strong>
-            <span class="reviews">(${escapeHTML(product.reviews)})</span>
-          </div>
-          <div class="price-row">
-            <strong class="price">${escapeHTML(product.price)}</strong>
-            <span class="old-price">${escapeHTML(product.oldPrice)}</span>
-          </div>
-          <p class="installment">${escapeHTML(product.installment)}</p>
-          <p class="description">${escapeHTML(product.description)}</p>
-          <div class="chips">
-            <span class="chip">ENVIO SEGURO</span>
-            <span class="chip">ATENDIMENTO PREMIUM</span>
-            <span class="chip">ESTOQUE LIMITADO</span>
-          </div>
+
+        <div class="catalog-reflection" aria-hidden="true"></div>
+      </div>
+
+      <div class="catalog-card-body">
+        <div class="catalog-meta-line">
+          <span>${escapeHTML(product.category)}</span>
+          <span class="catalog-stock"><i></i>${escapeHTML(product.availability||'Disponível')}</span>
         </div>
+
+        <h3>${escapeHTML(product.name)}</h3>
+
+        <div class="catalog-specs">
+          <span>${escapeHTML(product.presentation)}</span>
+          <span>${escapeHTML(product.specification)}</span>
+        </div>
+
+        <div class="catalog-rating">
+          <span class="stars">★★★★★</span>
+          <strong>${escapeHTML(product.rating)}</strong>
+          <span>(${escapeHTML(product.reviews)})</span>
+        </div>
+
+        <p class="catalog-description">${escapeHTML(product.description)}</p>
+
+        <div class="catalog-price-block">
+          <span class="catalog-old-price">${escapeHTML(product.oldPrice)}</span>
+          <strong class="catalog-price">${escapeHTML(product.price)}</strong>
+          <span class="catalog-installment">${escapeHTML(product.installment)}</span>
+        </div>
+
+        <button class="catalog-action" type="button">
+          <span>Ver apresentação</span>
+          <i aria-hidden="true">↗</i>
+        </button>
       </div>
     </article>
   `).join('');
 
-  document.querySelectorAll('.product-image').forEach(image=>{
+  document.querySelectorAll('.catalog-product-image img').forEach(image=>{
     const placeholder=image.nextElementSibling;
-    image.addEventListener('load',()=>placeholder.hidden=true);
-    image.addEventListener('error',()=>{image.hidden=true;placeholder.hidden=false;});
+
+    image.addEventListener('load',()=>{
+      image.hidden=false;
+      placeholder.hidden=true;
+    });
+
+    image.addEventListener('error',()=>{
+      image.hidden=true;
+      placeholder.hidden=false;
+    });
   });
 }
 
@@ -81,21 +108,42 @@ function update(){
   weightNumber.textContent=formatWeight(current);
   weightFill.style.width=`${eased*100}%`;
   weightMarker.style.left=`${eased*100}%`;
-
-  document.querySelectorAll('.product').forEach(section=>{
-    const progress=sectionProgress(section);
-    const centered=clamp((progress-.16)/.68,0,1);
-    const easedProduct=centered*centered*(3-2*centered);
-    const image=section.querySelector('.product-image-wrap');
-    const ring=section.querySelector('.product-ring');
-    const glow=section.querySelector('.product-glow');
-    image.style.transform=`rotateY(${-44+easedProduct*88}deg) rotateX(${8-Math.sin(easedProduct*Math.PI)*13}deg) scale(${.93+Math.sin(easedProduct*Math.PI)*.09})`;
-    ring.style.transform=`rotateX(70deg) rotateZ(${easedProduct*46}deg)`;
-    glow.style.opacity=String(.22+Math.sin(easedProduct*Math.PI)*.42);
-  });
 }
 
 renderProducts();
+
+const revealObserver=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('is-visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+},{threshold:.16});
+
+document.querySelectorAll('.catalog-card').forEach(card=>{
+  revealObserver.observe(card);
+
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    card.addEventListener('pointermove',event=>{
+      const bounds=card.getBoundingClientRect();
+      const x=(event.clientX-bounds.left)/bounds.width-.5;
+      const y=(event.clientY-bounds.top)/bounds.height-.5;
+      card.style.setProperty('--tilt-x',`${x*5}deg`);
+      card.style.setProperty('--tilt-y',`${y*-4}deg`);
+      card.style.setProperty('--light-x',`${(x+.5)*100}%`);
+      card.style.setProperty('--light-y',`${(y+.5)*100}%`);
+    });
+
+    card.addEventListener('pointerleave',()=>{
+      card.style.setProperty('--tilt-x','0deg');
+      card.style.setProperty('--tilt-y','0deg');
+      card.style.setProperty('--light-x','50%');
+      card.style.setProperty('--light-y','30%');
+    });
+  }
+});
+
 window.addEventListener('scroll',update,{passive:true});
 window.addEventListener('resize',update);
 update();
