@@ -65,10 +65,10 @@ function renderProducts(){
           <span class="catalog-installment">${escapeHTML(product.installment)}</span>
         </div>
 
-        <button class="catalog-action" type="button">
+        <a class="catalog-action catalog-buy" href="#" data-product-name="${escapeHTML(product.name)}" data-product-presentation="${escapeHTML(product.presentation)}">
           <span>Ver apresentação</span>
           <i aria-hidden="true">↗</i>
-        </button>
+        </a>
       </div>
     </article>
   `).join('');
@@ -147,3 +147,9 @@ document.querySelectorAll('.catalog-card').forEach(card=>{
 window.addEventListener('scroll',update,{passive:true});
 window.addEventListener('resize',update);
 update();
+
+
+
+const cfg=window.SITE_CONFIG||{},num=String(cfg.whatsapp||"").replace(/\D/g,""),prefix=cfg.whatsappMessagePrefix||"Olá! Quero saber mais sobre";
+function openWA(n,p){if(!num)return;window.open(`https://wa.me/${num}?text=${encodeURIComponent(`${prefix} ${n} — ${p}.`)}`,"_blank","noopener,noreferrer")}
+document.addEventListener("click",e=>{const b=e.target.closest(".catalog-buy");if(b){e.preventDefault();openWA(b.dataset.productName,b.dataset.productPresentation)}const g=e.target.closest("[data-general-whatsapp]");if(g){e.preventDefault();if(num)window.open(`https://wa.me/${num}?text=${encodeURIComponent("Olá! Quero falar com o atendimento Xeyla.")}`,"_blank","noopener,noreferrer")}});
