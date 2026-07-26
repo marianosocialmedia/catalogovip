@@ -151,5 +151,108 @@ update();
 
 
 const cfg=window.SITE_CONFIG||{},num=String(cfg.whatsapp||"").replace(/\D/g,""),prefix=cfg.whatsappMessagePrefix||"Olá! Quero saber mais sobre";
-function openWA(n,p){if(!num)return;window.open(`https://wa.me/${num}?text=${encodeURIComponent(`${prefix} ${n} — ${p}.`)}`,"_blank","noopener,noreferrer")}
+function openWA(n,p){
+  if(!num)return;
+  const url=`https://wa.me/${num}?text=${encodeURIComponent(`${prefix} ${n} — ${p}.`)}`;
+  setTimeout(()=>window.open(url,"_blank","noopener,noreferrer"),140);
+}
 document.addEventListener("click",e=>{const b=e.target.closest(".catalog-buy");if(b){e.preventDefault();openWA(b.dataset.productName,b.dataset.productPresentation)}const g=e.target.closest("[data-general-whatsapp]");if(g){e.preventDefault();if(num)window.open(`https://wa.me/${num}?text=${encodeURIComponent("Olá! Quero falar com o atendimento Xeyla.")}`,"_blank","noopener,noreferrer")}});
+
+
+/* ==========================================================
+   SONS PREMIUM — Web Audio API, sem arquivos externos
+   ========================================================== */
+const soundToggle=document.querySelector(".sound-toggle");
+let soundEnabled=true;
+let audioContext=null;
+let audioReady=false;
+
+function ensureAudio(){
+  if(!audioContext){
+    const AudioCtor=window.AudioContext||window.webkitAudioContext;
+    if(!AudioCtor) return null;
+    audioContext=new AudioCtor();
+  }
+  if(audioContext.state==="suspended"){
+    audioContext.resume().catch(()=>{});
+  }
+  audioReady=true;
+  return audioContext;
+}
+
+function createTone({frequency=880,duration=.18,volume=.055,type="sine",delay=0,slideTo=null}={}){
+  if(!soundEnabled) return;
+  const ctx=ensureAudio();
+  if(!ctx || ctx.state!=="running") return;
+
+  const start=ctx.currentTime+delay;
+  const oscillator=ctx.createOscillator();
+  const gain=ctx.createGain();
+
+  oscillator.type=type;
+  oscillator.frequency.setValueAtTime(frequency,start);
+  if(slideTo){
+    oscillator.frequency.exponentialRampToValueAtTime(slideTo,start+duration);
+  }
+
+  gain.gain.setValueAtTime(.0001,start);
+  gain.gain.exponentialRampToValueAtTime(volume,start+.018);
+  gain.gain.exponentialRampToValueAtTime(.0001,start+duration);
+
+  oscillator.connect(gain);
+  gain.connect(ctx.destination);
+  oscillator.start(start);
+  oscillator.stop(start+duration+.03);
+}
+
+function playProductChime(){
+  if(!audioReady || !soundEnabled) return;
+  createTone({frequency:660,duration:.22,volume:.035,type:"sine"});
+  createTone({frequency:990,duration:.28,volume:.028,type:"sine",delay:.06});
+  createTone({frequency:1320,duration:.18,volume:.018,type:"triangle",delay:.11});
+}
+
+function playBuyClick(){
+  if(!soundEnabled) return;
+  ensureAudio();
+  createTone({frequency:420,duration:.10,volume:.045,type:"sine",slideTo:620});
+  createTone({frequency:840,duration:.15,volume:.025,type:"triangle",delay:.045,slideTo:1080});
+}
+
+["pointerdown","touchstart","keydown"].forEach(eventName=>{
+  window.addEventListener(eventName,ensureAudio,{once:true,passive:true});
+});
+
+if(soundToggle){
+  soundToggle.addEventListener("click",()=>{
+    ensureAudio();
+    soundEnabled=!soundEnabled;
+    soundToggle.setAttribute("aria-pressed",String(soundEnabled));
+    soundToggle.classList.toggle("is-muted",!soundEnabled);
+    if(soundEnabled){
+      createTone({frequency:720,duration:.12,volume:.028,type:"sine",slideTo:940});
+    }
+  });
+}
+
+const productSoundObserver=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting && entry.intersectionRatio>=.58 && !entry.target.dataset.soundPlayed){
+      entry.target.dataset.soundPlayed="true";
+      playProductChime();
+    }
+
+    if(!entry.isIntersecting && entry.intersectionRatio<.08){
+      delete entry.target.dataset.soundPlayed;
+    }
+  });
+},{threshold:[0,.08,.58,.82]});
+
+document.querySelectorAll(".catalog-card").forEach(card=>productSoundObserver.observe(card));
+
+document.addEventListener("click",event=>{
+  const buy=event.target.closest(".catalog-buy");
+  if(buy){
+    playBuyClick();
+  }
+},true);
