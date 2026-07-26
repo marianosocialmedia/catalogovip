@@ -1,6 +1,6 @@
 window.SITE_CONFIG = {
-  whatsapp: "5521999999999",
-  whatsappMessagePrefix: "Olá! Quero continuar meu atendimento sobre o produto"
+  whatsapp: "5524999334587",
+  whatsappMessagePrefix: "Olá! Vi este item no catálogo e gostaria de saber mais"
 };
 
 /*
