@@ -65,8 +65,10 @@ function renderProducts(){
           <span class="catalog-installment">${escapeHTML(product.installment)}</span>
         </div>
 
-        <a class="catalog-action catalog-buy" href="#" data-product-name="${escapeHTML(product.name)}" data-product-presentation="${escapeHTML(product.presentation)}">
-          <span>Ver apresentação</span>
+        <a class="catalog-action catalog-buy" href="#" data-product-name="${escapeHTML(product.name)}" data-product-presentation="${escapeHTML(product.presentation)}"
+           data-product-specification="${escapeHTML(product.specification)}"
+           data-product-price="${escapeHTML(product.price)}">
+          <span>Saber mais</span>
           <i aria-hidden="true">↗</i>
         </a>
       </div>
@@ -98,16 +100,17 @@ function update(){
   const maxScroll=Math.max(document.documentElement.scrollHeight-window.innerHeight,1);
   progressBar.style.width=`${(window.scrollY/maxScroll)*100}%`;
 
-  const hero=document.querySelector('.hero');
-  const heroRect=hero.getBoundingClientRect();
-  const raw=clamp((-heroRect.top)/(window.innerHeight*.62),0,1);
+  const scaleSection=document.querySelector('.scale-section');
+  const scaleRect=scaleSection.getBoundingClientRect();
+  const raw=clamp((window.innerHeight-scaleRect.top)/(window.innerHeight+scaleSection.offsetHeight*.55),0,1);
   const eased=raw*raw*(3-2*raw);
   const start=112.8;
   const end=65;
   const current=start-(start-end)*eased;
   weightNumber.textContent=formatWeight(current);
-  weightFill.style.width=`${eased*100}%`;
-  weightMarker.style.left=`${eased*100}%`;
+  const remaining=(1-eased)*100;
+  weightFill.style.width=`${remaining}%`;
+  weightMarker.style.left=`${remaining}%`;
 }
 
 renderProducts();
@@ -151,12 +154,34 @@ update();
 
 
 const cfg=window.SITE_CONFIG||{},num=String(cfg.whatsapp||"").replace(/\D/g,""),prefix=cfg.whatsappMessagePrefix||"Olá! Quero saber mais sobre";
-function openWA(n,p){
+function openWA(name,presentation,specification,price){
   if(!num)return;
-  const url=`https://wa.me/${num}?text=${encodeURIComponent(`${prefix} ${n} — ${p}.`)}`;
-  setTimeout(()=>window.open(url,"_blank","noopener,noreferrer"),140);
+
+  const details=[
+    name,
+    presentation,
+    specification,
+    price
+  ].filter(Boolean).join(" — ");
+
+  const message=`${prefix}: ${details}. Pode me passar mais informações?`;
+  const url=`https://wa.me/${num}?text=${encodeURIComponent(message)}`;
+
+  setTimeout(()=>{
+    window.open(url,"_blank","noopener,noreferrer");
+  },140);
 }
-document.addEventListener("click",e=>{const b=e.target.closest(".catalog-buy");if(b){e.preventDefault();openWA(b.dataset.productName,b.dataset.productPresentation)}const g=e.target.closest("[data-general-whatsapp]");if(g){e.preventDefault();if(num)window.open(`https://wa.me/${num}?text=${encodeURIComponent("Olá! Quero falar com o atendimento Xeyla.")}`,"_blank","noopener,noreferrer")}});
+document.addEventListener("click",e=>{
+  const b=e.target.closest(".catalog-buy");
+  if(b){
+    e.preventDefault();
+    openWA(
+      b.dataset.productName,
+      b.dataset.productPresentation,
+      b.dataset.productSpecification,
+      b.dataset.productPrice
+    );
+  }const g=e.target.closest("[data-general-whatsapp]");if(g){e.preventDefault();if(num)window.open(`https://wa.me/${num}?text=${encodeURIComponent("Olá! Quero falar com o atendimento Xeyla.")}`,"_blank","noopener,noreferrer")}});
 
 
 /* ==========================================================
