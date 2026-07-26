@@ -1463,3 +1463,202 @@ body{
     font-size:14px!important;
   }
 }
+
+
+/* ==========================================================
+   V19 — CORTE LIMPO BRANCO/PRETO + BALANÇA VERDE
+   ========================================================== */
+
+/* O fundo claro termina de forma limpa; nada de faixa cinza. */
+.hero{
+  min-height:88vh!important;
+  overflow:visible!important;
+  background:
+    radial-gradient(circle at 50% 8%,rgba(78,232,163,.13),transparent 23%),
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f7f6f1 74.8%,
+      #050705 74.85%,
+      #050705 100%
+    )!important;
+}
+
+/* Remove qualquer camada antiga que criava cinza na divisão. */
+.hero::after{
+  display:none!important;
+}
+
+.luxury-bg{
+  bottom:25.2%!important;
+  overflow:hidden!important;
+}
+
+.luxury-bg::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:1px;
+  background:rgba(255,255,255,.92);
+}
+
+/* A seção de produtos já começa preta com luz verde. */
+.catalog-intro{
+  position:relative;
+  margin-top:0!important;
+  padding-top:124px!important;
+  background:
+    radial-gradient(circle at 50% 0,rgba(55,226,153,.20),transparent 30%),
+    radial-gradient(circle at 18% 14%,rgba(20,139,94,.11),transparent 22%),
+    linear-gradient(180deg,#050705 0%,#040604 100%)!important;
+}
+
+.catalog-intro::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:120px;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse at 50% 0,rgba(58,232,158,.22),transparent 68%);
+  filter:blur(18px);
+}
+
+/* Balança exatamente no corte branco/preto. */
+.simple-scale-stage{
+  height:220px!important;
+  margin-top:0!important;
+  overflow:visible!important;
+}
+
+.simple-scale{
+  top:auto!important;
+  bottom:-104px!important;
+  transform:translateX(-50%)!important;
+  width:min(64%,570px)!important;
+}
+
+.simple-floor-shadow{
+  top:auto!important;
+  bottom:-112px!important;
+  transform:translateX(-50%)!important;
+  width:56%!important;
+  height:70px!important;
+  background:
+    radial-gradient(ellipse,rgba(55,226,153,.28),transparent 70%)!important;
+  filter:blur(22px)!important;
+}
+
+/* Sem roxo: vidro, blur, borda, barra e luzes só em verdes. */
+.simple-scale-glass{
+  border:1px solid rgba(137,247,195,.34)!important;
+  background:
+    radial-gradient(circle at 50% 10%,rgba(85,246,177,.34),transparent 34%),
+    radial-gradient(circle at 16% 90%,rgba(18,137,92,.18),transparent 36%),
+    linear-gradient(145deg,#05150c 0%,#092719 52%,#06140d 100%)!important;
+  box-shadow:
+    0 42px 102px rgba(0,0,0,.52),
+    0 0 62px rgba(55,226,153,.25),
+    inset 0 1px 0 rgba(210,255,233,.22),
+    inset 0 -22px 48px rgba(0,0,0,.26)!important;
+}
+
+.simple-scale-glass::before{
+  border-color:rgba(110,238,181,.12)!important;
+  box-shadow:
+    inset 0 0 38px rgba(55,226,153,.06)!important;
+}
+
+.simple-scale-copy{
+  color:#baf7d8!important;
+  text-shadow:0 0 16px rgba(55,226,153,.26)!important;
+}
+
+.simple-scale-glass .weight-number{
+  color:#effff7!important;
+  text-shadow:
+    0 0 20px rgba(55,226,153,.42),
+    0 0 44px rgba(55,226,153,.22)!important;
+}
+
+.simple-scale-glass .weight-unit{
+  color:rgba(226,255,240,.70)!important;
+}
+
+/* A barra nasce à direita e cresce para a esquerda. */
+.simple-scale-glass .weight-track{
+  position:relative!important;
+  overflow:visible!important;
+  background:rgba(84,211,149,.14)!important;
+}
+
+.simple-scale-glass .weight-track-fill{
+  --weight-progress:0%;
+  position:absolute!important;
+  top:0!important;
+  right:0!important;
+  left:auto!important;
+  width:var(--weight-progress)!important;
+  height:100%!important;
+  transform-origin:right center!important;
+  border-radius:999px!important;
+  background:
+    linear-gradient(90deg,#4ce3a0 0%,#22b878 52%,#0b7048 100%)!important;
+  box-shadow:
+    0 0 18px rgba(55,226,153,.52)!important;
+}
+
+.simple-scale-glass .weight-marker{
+  --weight-progress:0%;
+  position:absolute!important;
+  top:50%!important;
+  right:var(--weight-progress)!important;
+  left:auto!important;
+  transform:translate(50%,-50%)!important;
+  background:#effff7!important;
+  box-shadow:
+    0 0 0 4px rgba(55,226,153,.12),
+    0 0 26px rgba(55,226,153,.82)!important;
+}
+
+/* Mobile: mantém o mesmo corte limpo e a integração. */
+@media(max-width:900px){
+  .hero{
+    min-height:84vh!important;
+    background:
+      radial-gradient(circle at 50% 8%,rgba(78,232,163,.12),transparent 22%),
+      linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #f7f6f1 76.8%,
+        #050705 76.85%,
+        #050705 100%
+      )!important;
+  }
+
+  .luxury-bg{
+    bottom:23.2%!important;
+  }
+
+  .simple-scale-stage{
+    height:196px!important;
+  }
+
+  .simple-scale{
+    width:92%!important;
+    bottom:-92px!important;
+  }
+
+  .simple-floor-shadow{
+    bottom:-99px!important;
+    width:78%!important;
+  }
+
+  .catalog-intro{
+    padding-top:112px!important;
+  }
+}
