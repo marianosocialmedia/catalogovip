@@ -1,0 +1,22 @@
+IMAGENS DOS 10 PRODUTOS
+
+Coloque nesta pasta:
+
+produto-01.png
+produto-02.png
+produto-03.png
+produto-04.png
+produto-05.png
+produto-06.png
+produto-07.png
+produto-08.png
+produto-09.png
+produto-10.png
+
+Recomendado:
+- PNG com fundo transparente
+- produto centralizado
+- no mínimo 1200 px
+- pouco espaço vazio ao redor
+
+Caso altere o nome do arquivo, atualize também o campo `image` no products.js.
