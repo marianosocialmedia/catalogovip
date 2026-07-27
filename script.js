@@ -13,8 +13,10 @@ function escapeHTML(value=''){
   })[char]);
 }
 
-function renderProducts(){
-  const products=window.PRODUCTS||[];
+function renderProducts(productsInput){
+  const products=Array.isArray(productsInput) && productsInput.length
+    ? productsInput
+    : (window.PRODUCTS||window.PRODUCTS_FALLBACK||[]);
 
   productList.innerHTML=products.map((product,index)=>`
     <article class="catalog-card" data-product="${index}">
@@ -105,7 +107,7 @@ function update(){
   const raw=clamp((window.innerHeight-scaleRect.top)/(window.innerHeight+scaleSection.offsetHeight*.55),0,1);
   const eased=raw*raw*(3-2*raw);
   const start=112.8;
-  const end=65;
+  const end=60;
   const current=start-(start-end)*eased;
   weightNumber.textContent=formatWeight(current);
   const remaining=(1-eased)*100;
@@ -113,39 +115,68 @@ function update(){
   weightMarker.style.left=`${remaining}%`;
 }
 
-renderProducts();
 
-const revealObserver=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add('is-visible');
-      revealObserver.unobserve(entry.target);
+
+
+
+/* ==========================================================
+   CARREGAMENTO DIRETO DOS PRODUTOS
+   Funciona no desktop e no mobile sem depender de products.txt.
+   Aceita window.PRODUCTS e window.PRODUCTS_FALLBACK.
+   ========================================================== */
+
+function activateProductCards(){
+  const revealObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },{threshold:.08});
+
+  document.querySelectorAll(".catalog-card").forEach(card=>{
+    revealObserver.observe(card);
+
+    if(window.matchMedia("(hover:hover) and (pointer:fine)").matches){
+      card.addEventListener("pointermove",event=>{
+        const bounds=card.getBoundingClientRect();
+        const x=(event.clientX-bounds.left)/bounds.width-.5;
+        const y=(event.clientY-bounds.top)/bounds.height-.5;
+        card.style.setProperty("--tilt-x",`${x*5}deg`);
+        card.style.setProperty("--tilt-y",`${y*-4}deg`);
+        card.style.setProperty("--light-x",`${(x+.5)*100}%`);
+        card.style.setProperty("--light-y",`${(y+.5)*100}%`);
+      });
+
+      card.addEventListener("pointerleave",()=>{
+        card.style.setProperty("--tilt-x","0deg");
+        card.style.setProperty("--tilt-y","0deg");
+        card.style.setProperty("--light-x","50%");
+        card.style.setProperty("--light-y","30%");
+      });
     }
   });
-},{threshold:.16});
+}
 
-document.querySelectorAll('.catalog-card').forEach(card=>{
-  revealObserver.observe(card);
+function loadProductsDirectly(){
+  const products=Array.isArray(window.PRODUCTS) && window.PRODUCTS.length
+    ? window.PRODUCTS
+    : (Array.isArray(window.PRODUCTS_FALLBACK) ? window.PRODUCTS_FALLBACK : []);
 
-  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
-    card.addEventListener('pointermove',event=>{
-      const bounds=card.getBoundingClientRect();
-      const x=(event.clientX-bounds.left)/bounds.width-.5;
-      const y=(event.clientY-bounds.top)/bounds.height-.5;
-      card.style.setProperty('--tilt-x',`${x*5}deg`);
-      card.style.setProperty('--tilt-y',`${y*-4}deg`);
-      card.style.setProperty('--light-x',`${(x+.5)*100}%`);
-      card.style.setProperty('--light-y',`${(y+.5)*100}%`);
-    });
+  renderProducts(products);
 
-    card.addEventListener('pointerleave',()=>{
-      card.style.setProperty('--tilt-x','0deg');
-      card.style.setProperty('--tilt-y','0deg');
-      card.style.setProperty('--light-x','50%');
-      card.style.setProperty('--light-y','30%');
-    });
-  }
-});
+  requestAnimationFrame(()=>{
+    activateProductCards();
+    update();
+  });
+}
+
+if(document.readyState==="loading"){
+  document.addEventListener("DOMContentLoaded",loadProductsDirectly,{once:true});
+}else{
+  loadProductsDirectly();
+}
 
 window.addEventListener('scroll',update,{passive:true});
 window.addEventListener('resize',update);
