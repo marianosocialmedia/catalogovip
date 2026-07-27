@@ -181,7 +181,7 @@ document.addEventListener("click",e=>{
       b.dataset.productSpecification,
       b.dataset.productPrice
     );
-  }const g=e.target.closest("[data-general-whatsapp]");if(g){e.preventDefault();if(num)window.open(`https://wa.me/${num}?text=${encodeURIComponent("Olá! Quero falar com o atendimento Xeyla.")}`,"_blank","noopener,noreferrer")}});
+  }const g=e.target.closest("[data-general-whatsapp]");if(g){e.preventDefault();if(num)window.open(`https://wa.me/${num}?text=${encodeURIComponent("Olá! Quero falar com o atendimento Sheila.")}`,"_blank","noopener,noreferrer")}});
 
 
 /* ==========================================================
