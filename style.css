@@ -1978,3 +1978,154 @@ body{
     padding-top:42px!important;
   }
 }
+
+
+/* ==========================================================
+   V22 — BALANÇA INTEGRADA À MESMA SEÇÃO DOS PRODUTOS
+   ========================================================== */
+
+/* O hero termina no branco. A área seguinte é uma única seção. */
+.hero{
+  min-height:76vh!important;
+  padding-bottom:28px!important;
+  overflow:hidden!important;
+  background:
+    radial-gradient(circle at 50% 8%,rgba(59,224,151,.11),transparent 24%),
+    linear-gradient(180deg,#ffffff 0%,#f7f6f1 100%)!important;
+}
+
+.products-zone{
+  position:relative;
+  overflow:hidden;
+  margin:0;
+  padding:0 0 96px;
+  background:
+    radial-gradient(circle at 50% 0,rgba(52,232,157,.24),transparent 24%),
+    radial-gradient(circle at 12% 24%,rgba(12,112,70,.12),transparent 22%),
+    radial-gradient(circle at 88% 45%,rgba(28,153,101,.08),transparent 20%),
+    linear-gradient(180deg,#061008 0%,#030603 42%,#050705 100%);
+}
+
+.products-zone::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(81,226,161,.022) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(81,226,161,.022) 1px,transparent 1px);
+  background-size:68px 68px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.76),transparent 78%);
+}
+
+/* A balança agora está inteiramente dentro da seção dos produtos. */
+.products-zone .scale-section{
+  position:relative;
+  min-height:370px!important;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:54px 5vw 20px!important;
+  margin:0!important;
+  overflow:visible!important;
+  background:transparent!important;
+  border:0!important;
+}
+
+.products-zone .scale-section::before{
+  display:none!important;
+}
+
+.products-zone .scale-section-glow{
+  top:-70px!important;
+  width:760px!important;
+  height:300px!important;
+  background:
+    radial-gradient(ellipse,rgba(57,226,153,.34),transparent 68%)!important;
+  filter:blur(44px)!important;
+}
+
+.products-zone .scale-stage{
+  position:relative!important;
+  width:min(92vw,760px)!important;
+  height:310px!important;
+  margin:0 auto!important;
+}
+
+.products-zone .scale{
+  top:0!important;
+  bottom:auto!important;
+  width:min(88%,650px)!important;
+  min-height:300px!important;
+  transform:translateX(-50%)!important;
+}
+
+.products-zone .scale-shadow{
+  bottom:-12px!important;
+}
+
+/* O texto vem logo após a balança, sem corte nem espaço estranho. */
+.products-zone .catalog-intro{
+  position:relative;
+  z-index:3;
+  margin:0!important;
+  padding:24px 5vw 30px!important;
+  background:transparent!important;
+}
+
+.products-zone .catalog-intro::before{
+  display:none!important;
+}
+
+.products-zone .product-list{
+  position:relative;
+  z-index:3;
+  margin:0 auto!important;
+  padding-top:0!important;
+  padding-bottom:0!important;
+  background:transparent!important;
+}
+
+.products-zone .product-list::after{
+  bottom:-120px!important;
+}
+
+/* Remove fundos conflitantes das versões anteriores. */
+.scale-section,
+.catalog-intro,
+.product-list{
+  background-color:transparent!important;
+}
+
+/* Mobile com a mesma integração, sem esconder metade da balança. */
+@media(max-width:900px){
+  .hero{
+    min-height:70vh!important;
+    padding-bottom:22px!important;
+  }
+
+  .products-zone{
+    padding-bottom:68px!important;
+  }
+
+  .products-zone .scale-section{
+    min-height:305px!important;
+    padding:34px 12px 12px!important;
+  }
+
+  .products-zone .scale-stage{
+    width:100%!important;
+    height:265px!important;
+    margin:0 auto!important;
+  }
+
+  .products-zone .scale{
+    width:94%!important;
+    min-height:250px!important;
+    top:0!important;
+  }
+
+  .products-zone .catalog-intro{
+    padding:18px 20px 24px!important;
+  }
+}
