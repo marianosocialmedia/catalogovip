@@ -2169,3 +2169,42 @@ body{
 @media(prefers-reduced-motion:reduce){
   .catalog-action,.catalog-action::after{animation:none!important}
 }
+
+
+/* ==========================================================
+   V24 — CATÁLOGO PRIVADO + CTA FINAL
+   ========================================================== */
+
+.footer-brand h3{
+  max-width:560px;
+  margin:14px 0 12px;
+  font-family:"DM Sans",sans-serif;
+  font-size:clamp(24px,3.2vw,44px);
+  font-weight:500;
+  line-height:1.02;
+  letter-spacing:-.045em;
+  color:#f4fff9;
+}
+
+.footer-brand p{
+  max-width:520px!important;
+  margin-top:0!important;
+  color:rgba(255,255,255,.56)!important;
+  font-size:13px!important;
+  line-height:1.7!important;
+}
+
+@media(max-width:900px){
+  .footer-brand h3{
+    max-width:230px;
+    margin:10px 0 8px;
+    font-size:clamp(16px,4vw,24px);
+    line-height:1.05;
+  }
+
+  .footer-brand p{
+    max-width:210px!important;
+    font-size:9px!important;
+    line-height:1.45!important;
+  }
+}
