@@ -15,7 +15,7 @@ window.SITE_CONFIG = {
 
 window.PRODUCTS = [
   {
-    name: "T.G. ampola 15mg (Tirzepatida)",
+    name: "T.G. ampola 15mg",
     category: "Seleção Sheila",
     presentation: "Caixa com 1 unidade",
     specification: "15mg",
@@ -26,12 +26,12 @@ window.PRODUCTS = [
     reviews: "128 avaliações",
     badge: "MAIS ESCOLHIDO",
     availability: "Disponível",
-    description: "Caixa com uma ampola 15mg",
+    description: "T.G. ampola 15mg",
     image: "assets/products/produto-01.png",
     accent: "green"
   },
   {
-    name: "T.G. caixa com 4 ampolas 15mg (Tirzepatida)",
+    name: "T.G. caixa com 4 ampolas 15mg",
     category: "Seleção Sheila",
     presentation: "Caixa com 4 unidades",
     specification: "15mg",
@@ -47,7 +47,7 @@ window.PRODUCTS = [
     accent: "green"
   },
   {
-    name: "LIPOLAND ampola 15mg (Tirzepatida)",
+    name: "LIPOLAND ampola 15mg",
     category: "Seleção Sheila",
     presentation: "Ampola avulsa",
     specification: "15mg",
@@ -63,7 +63,7 @@ window.PRODUCTS = [
     accent: "green"
   },
   {
-    name: "LIPOLAND caixa com 4 ampolas 15mg (Tirzepatida)",
+    name: "LIPOLAND caixa com 4 ampolas 15mg",
     category: "Seleção Sheila",
     presentation: "Caixa com 4 ampolas",
     specification: "15mg",
@@ -79,7 +79,7 @@ window.PRODUCTS = [
     accent: "green"
   },
   {
-    name: "LIPOLESS ampola 15mg (Tirzepatida) ",
+    name: "LIPOLESS ampola 15mg",
     category: "Seleção Sheila",
     presentation: "Ampola avulsa",
     specification: "15mg",
@@ -95,7 +95,7 @@ window.PRODUCTS = [
     accent: "green"
   },
   {
-    name: "LIPOLESS caixa com 4 ampolas 15mg (Tirzepatida)",
+    name: "LIPOLESS caixa com 4 ampolas 15mg",
     category: "Seleção Sheila",
     presentation: "4 ampolas",
     specification: "15mg",
@@ -111,7 +111,7 @@ window.PRODUCTS = [
     accent: "green"
   },
   {
-    name: "TIZERC ampola 15mg (Tirzepatida)",
+    name: "TIZERC ampola 15mg",
     category: "Seleção Sheila",
     presentation: "Ampola avulsa",
     specification: "15mg",
@@ -127,7 +127,7 @@ window.PRODUCTS = [
     accent: "green"
   },
   {
-    name: "TIZERC caixa com 4 ampolas 15mg (Tirzepatida)",
+    name: "TIZERC caixa com 4 ampolas 15mg",
     category: "Seleção Sheila",
     presentation: "4 ampolas",
     specification: "15mg",
@@ -143,7 +143,7 @@ window.PRODUCTS = [
     accent: "green"
   },
   {
-    name: "TG ampola 15mg (Tirzepatida)",
+    name: "TG ampola 15mg",
     category: "Seleção Sheila",
     presentation: "Ampola avulsa",
     specification: "15mg",
@@ -159,7 +159,7 @@ window.PRODUCTS = [
     accent: "green"
   },
   {
-    name: "TG caixa com 4 ampolas 15mg (Tirzepatida)",
+    name: "TG caixa com 4 ampolas 15mg",
     category: "Seleção Sheila",
     presentation: "4 ampolas",
     specification: "15mg",
