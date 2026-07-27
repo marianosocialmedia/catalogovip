@@ -100,7 +100,7 @@ function update(){
   const maxScroll=Math.max(document.documentElement.scrollHeight-window.innerHeight,1);
   progressBar.style.width=`${(window.scrollY/maxScroll)*100}%`;
 
-  const scaleSection=document.querySelector('.scale-section');
+  const scaleSection=document.querySelector('.products-zone');
   const scaleRect=scaleSection.getBoundingClientRect();
   const raw=clamp((window.innerHeight-scaleRect.top)/(window.innerHeight+scaleSection.offsetHeight*.55),0,1);
   const eased=raw*raw*(3-2*raw);
