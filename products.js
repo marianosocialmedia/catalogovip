@@ -221,4 +221,5 @@ window.PRODUCTS = [
     description: "Seringa 100mg.",
     image: "assets/products/produto-13.png",
     accent: "green"
+  }
   ];
