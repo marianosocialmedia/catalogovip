@@ -2490,3 +2490,22 @@ body{
     opacity:.46!important;
   }
 }
+
+
+/* ==========================================================
+   V28 — SEÇÃO FINAL ANTIGA REMOVIDA DE VERDADE
+   ========================================================== */
+
+.final,
+#final{
+  display:none!important;
+}
+
+/* Cola a CTA privada diretamente ao final do catálogo. */
+.products-zone{
+  padding-bottom:0!important;
+}
+
+.private-cta-section{
+  margin-top:0!important;
+}
