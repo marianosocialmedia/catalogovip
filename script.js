@@ -104,8 +104,9 @@ function update(){
 
   const scaleSection=document.querySelector('.products-zone');
   const scaleRect=scaleSection.getBoundingClientRect();
-  const raw=clamp((window.innerHeight-scaleRect.top)/(window.innerHeight+scaleSection.offsetHeight*.55),0,1);
-  const eased=raw*raw*(3-2*raw);
+  const raw=clamp((window.innerHeight-scaleRect.top)/(window.innerHeight+scaleSection.offsetHeight*.30),0,1);
+  const accelerated=clamp(raw*1.38,0,1);
+  const eased=accelerated*accelerated*(3-2*accelerated);
   const start=112.8;
   const end=60;
   const current=start-(start-end)*eased;
