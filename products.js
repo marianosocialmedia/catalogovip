@@ -13,7 +13,7 @@ window.SITE_CONFIG = {
   - image: caminho da imagem dentro de assets/products/
 */
 
-window.PRODUCTS = [
+window.PRODUCTS_FALLBACK = [
   {
     name: "T.G. ampola 15mg",
     category: "Seleção Sheila",
