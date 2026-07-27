@@ -2509,3 +2509,25 @@ body{
 .private-cta-section{
   margin-top:0!important;
 }
+
+
+/* ==========================================================
+   V31 — CORREÇÃO MOBILE
+   ========================================================== */
+
+@media(max-width:900px){
+  .catalog-card{
+    opacity:1!important;
+    visibility:visible!important;
+    transform:none!important;
+  }
+
+  .catalog-card.is-visible{
+    opacity:1!important;
+    transform:none!important;
+  }
+
+  .product-list{
+    min-height:200px;
+  }
+}
