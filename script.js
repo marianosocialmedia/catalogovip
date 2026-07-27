@@ -30,11 +30,6 @@ function renderProducts(productsInput){
 
         <div class="catalog-product-image">
           <img src="${escapeHTML(product.image)}" alt="${escapeHTML(product.name)}" loading="lazy">
-          <div class="catalog-placeholder">
-            <strong>${escapeHTML(product.name)}</strong>
-            <span>adicione a imagem em</span>
-            <code>${escapeHTML(product.image)}</code>
-          </div>
         </div>
 
         <div class="catalog-reflection" aria-hidden="true"></div>
@@ -78,16 +73,14 @@ function renderProducts(productsInput){
   `).join('');
 
   document.querySelectorAll('.catalog-product-image img').forEach(image=>{
-    const placeholder=image.nextElementSibling;
-
     image.addEventListener('load',()=>{
       image.hidden=false;
-      placeholder.hidden=true;
+      image.classList.add('is-ready');
     });
 
     image.addEventListener('error',()=>{
       image.hidden=true;
-      placeholder.hidden=false;
+      image.closest('.catalog-product-image')?.classList.add('is-empty');
     });
   });
 }
@@ -104,8 +97,8 @@ function update(){
 
   const scaleSection=document.querySelector('.products-zone');
   const scaleRect=scaleSection.getBoundingClientRect();
-  const raw=clamp((window.innerHeight-scaleRect.top)/(window.innerHeight+scaleSection.offsetHeight*.30),0,1);
-  const accelerated=clamp(raw*1.38,0,1);
+  const raw=clamp((window.innerHeight-scaleRect.top)/(window.innerHeight+scaleSection.offsetHeight*.18),0,1);
+  const accelerated=clamp(raw*1.7,0,1);
   const eased=accelerated*accelerated*(3-2*accelerated);
   const start=112.8;
   const end=60;
