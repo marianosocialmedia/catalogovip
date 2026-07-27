@@ -2531,3 +2531,223 @@ body{
     min-height:200px;
   }
 }
+
+
+/* ==========================================================
+   V32 — TÍTULO CENTRAL + PRODUTOS PREMIUM + FOTO ARREDONDADA
+   ========================================================== */
+
+/* Título da seção seguindo a mesma linguagem visual do site. */
+.catalog-intro{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  max-width:1120px!important;
+  margin:0 auto!important;
+  padding:92px 5vw 42px!important;
+  text-align:center!important;
+  background:transparent!important;
+}
+
+.catalog-intro .section-kicker{
+  display:block!important;
+  margin-bottom:20px!important;
+  font-family:"DM Sans",sans-serif!important;
+  font-size:10px!important;
+  font-weight:700!important;
+  letter-spacing:.22em!important;
+  text-align:center!important;
+}
+
+.catalog-intro h2{
+  max-width:940px!important;
+  margin:0 auto!important;
+  color:#f8fff9!important;
+  font-family:"DM Sans",sans-serif!important;
+  font-size:clamp(46px,6.2vw,84px)!important;
+  font-weight:500!important;
+  line-height:.96!important;
+  letter-spacing:-.058em!important;
+  text-align:center!important;
+}
+
+.catalog-intro h2 em{
+  display:inline-block!important;
+  margin-top:5px!important;
+  color:#94eabb!important;
+  font-family:"Playfair Display",serif!important;
+  font-weight:600!important;
+  font-style:italic!important;
+  letter-spacing:-.035em!important;
+}
+
+.catalog-intro p{
+  max-width:650px!important;
+  margin:24px auto 0!important;
+  color:rgba(255,255,255,.58)!important;
+  font-family:"DM Sans",sans-serif!important;
+  font-size:14px!important;
+  line-height:1.75!important;
+  text-align:center!important;
+}
+
+/* Tipografia dos cards mais simples, limpa e comercial. */
+.catalog-card,
+.catalog-card-body,
+.catalog-card-body p,
+.catalog-card-body span,
+.catalog-specs,
+.catalog-rating,
+.catalog-description,
+.catalog-installment{
+  font-family:Arial,"Helvetica Neue","DM Sans",sans-serif!important;
+}
+
+.catalog-card-body h3{
+  margin:16px 0 11px!important;
+  font-family:Arial,"Helvetica Neue","DM Sans",sans-serif!important;
+  font-size:clamp(23px,2.2vw,31px)!important;
+  font-weight:600!important;
+  line-height:1.12!important;
+  letter-spacing:-.025em!important;
+}
+
+.catalog-price{
+  margin-top:5px!important;
+  font-family:Arial,"Helvetica Neue","DM Sans",sans-serif!important;
+  font-size:clamp(31px,3.1vw,43px)!important;
+  font-weight:600!important;
+  line-height:1!important;
+  letter-spacing:-.035em!important;
+}
+
+.catalog-description{
+  font-size:13px!important;
+  line-height:1.58!important;
+}
+
+.catalog-installment{
+  font-size:12px!important;
+  line-height:1.45!important;
+}
+
+/* Moldura premium, mais arredondada e com produto centralizado. */
+.catalog-card-media{
+  min-height:430px!important;
+  padding:28px!important;
+  border-radius:32px 32px 0 0!important;
+}
+
+.catalog-card-media::before{
+  inset:18px!important;
+  border-radius:30px!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.018))!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 18px 45px rgba(0,0,0,.12)!important;
+}
+
+.catalog-product-image{
+  position:relative!important;
+  z-index:3!important;
+  width:calc(100% - 44px)!important;
+  height:calc(100% - 56px)!important;
+  min-height:340px!important;
+  margin:28px auto 0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:hidden!important;
+  border-radius:28px!important;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(255,255,255,.12),transparent 48%),
+    linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.012))!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.09),
+    inset 0 0 0 1px rgba(255,255,255,.045),
+    0 22px 50px rgba(0,0,0,.13)!important;
+}
+
+.catalog-product-image img{
+  display:block!important;
+  width:88%!important;
+  height:88%!important;
+  max-width:500px!important;
+  max-height:500px!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  margin:auto!important;
+  border-radius:22px!important;
+  filter:drop-shadow(0 24px 28px rgba(0,0,0,.20))!important;
+}
+
+/* O card inteiro também ganha acabamento mais arredondado. */
+.catalog-card{
+  border-radius:38px!important;
+}
+
+.catalog-card-body{
+  padding:28px 30px 32px!important;
+}
+
+/* Mobile */
+@media(max-width:900px){
+  .catalog-intro{
+    padding:76px 20px 34px!important;
+  }
+
+  .catalog-intro h2{
+    max-width:95%!important;
+    font-size:clamp(40px,11.2vw,58px)!important;
+    line-height:.98!important;
+  }
+
+  .catalog-intro p{
+    max-width:90%!important;
+    font-size:13px!important;
+  }
+
+  .catalog-card{
+    border-radius:30px!important;
+  }
+
+  .catalog-card-media{
+    min-height:360px!important;
+    padding:20px!important;
+    border-radius:30px 30px 0 0!important;
+  }
+
+  .catalog-card-media::before{
+    inset:12px!important;
+    border-radius:24px!important;
+  }
+
+  .catalog-product-image{
+    width:calc(100% - 20px)!important;
+    height:calc(100% - 34px)!important;
+    min-height:292px!important;
+    margin-top:24px!important;
+    border-radius:24px!important;
+  }
+
+  .catalog-product-image img{
+    width:91%!important;
+    height:91%!important;
+    border-radius:18px!important;
+  }
+
+  .catalog-card-body{
+    padding:24px 23px 27px!important;
+  }
+
+  .catalog-card-body h3{
+    font-size:24px!important;
+  }
+
+  .catalog-price{
+    font-size:35px!important;
+  }
+}
