@@ -26,9 +26,7 @@ window.PRODUCTS = [
     reviews: "128 avaliações",
     badge: "MAIS ESCOLHIDO",
     availability: "Disponível",
-    description: "TG CAIXA FECHADA 
-      R$ 1200,00 pagamento no dinheiro 
-R$ 1300,00 no pix ou cartão de crédito (parcelado em até 18x com acréscimo da maquina)",
+    description: "Caixa com uma ampola 15mg",
     image: "assets/products/produto-01.png",
     accent: "green"
   },
