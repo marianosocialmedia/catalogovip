@@ -2129,3 +2129,43 @@ body{
     padding:18px 20px 24px!important;
   }
 }
+
+/* V23 — 60 KG + BOTÃO ANIMADO */
+.catalog-action{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  animation:sheilaButtonFloat 3.2s ease-in-out infinite!important;
+}
+.catalog-action::after{
+  content:"";
+  position:absolute;
+  top:-40%;
+  left:-42%;
+  width:34%;
+  height:180%;
+  z-index:-1;
+  transform:rotate(18deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
+  animation:sheilaButtonShine 3.8s ease-in-out infinite;
+  pointer-events:none;
+}
+.catalog-action:hover{
+  animation-play-state:paused!important;
+  transform:translateY(-3px) scale(1.012)!important;
+}
+.catalog-action:active{
+  transform:translateY(0) scale(.985)!important;
+}
+@keyframes sheilaButtonFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-2px)}
+}
+@keyframes sheilaButtonShine{
+  0%,58%{left:-42%;opacity:0}
+  67%{opacity:1}
+  82%,100%{left:116%;opacity:0}
+}
+@media(prefers-reduced-motion:reduce){
+  .catalog-action,.catalog-action::after{animation:none!important}
+}
