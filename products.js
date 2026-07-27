@@ -6,6 +6,7 @@ window.SITE_CONFIG = {
 /*
   COMO EDITAR:
   - name: nome do produto
+  - category: categoria ou linha
   - presentation: caixa, unidade, ampola etc.
   - specification: detalhe complementar
   - price: preço principal
@@ -15,7 +16,7 @@ window.SITE_CONFIG = {
 window.PRODUCTS = [
   {
     name: "Produto 01",
-    category: "Seleção Exclusiva",
+    category: "Seleção Sheila",
     presentation: "Caixa com 1 unidade",
     specification: "Apresentação individual",
     price: "R$ 0.000,00",
@@ -31,7 +32,7 @@ window.PRODUCTS = [
   },
   {
     name: "Produto 02",
-    category: "Seleção Exclusiva",
+    category: "Seleção Sheila",
     presentation: "Caixa com 4 unidades",
     specification: "Apresentação com quatro unidades",
     price: "R$ 0.000,00",
@@ -47,7 +48,7 @@ window.PRODUCTS = [
   },
   {
     name: "Produto 03",
-    category: "Seleção Exclusiva",
+    category: "Seleção Sheila",
     presentation: "Ampola avulsa",
     specification: "1 ampola",
     price: "R$ 0.000,00",
@@ -63,7 +64,7 @@ window.PRODUCTS = [
   },
   {
     name: "Produto 04",
-    category: "Seleção Exclusiva",
+    category: "Seleção Sheila",
     presentation: "Unidade",
     specification: "Embalagem individual",
     price: "R$ 0.000,00",
@@ -75,6 +76,102 @@ window.PRODUCTS = [
     availability: "Disponível",
     description: "Descrição curta para facilitar a comparação entre os produtos.",
     image: "assets/products/produto-04.png",
+    accent: "green"
+  },
+  {
+    name: "Produto 05",
+    category: "Seleção Sheila",
+    presentation: "Apresentação 05",
+    specification: "Especificação do produto",
+    price: "R$ 0.000,00",
+    oldPrice: "",
+    installment: "Condições confirmadas no atendimento",
+    rating: "4,9",
+    reviews: "87 avaliações",
+    badge: "SELEÇÃO",
+    availability: "Disponível",
+    description: "Descrição curta para apresentar este produto.",
+    image: "assets/products/produto-05.png",
+    accent: "green"
+  },
+  {
+    name: "Produto 06",
+    category: "Seleção Sheila",
+    presentation: "Apresentação 06",
+    specification: "Especificação do produto",
+    price: "R$ 0.000,00",
+    oldPrice: "",
+    installment: "Condições confirmadas no atendimento",
+    rating: "4,8",
+    reviews: "69 avaliações",
+    badge: "DESTAQUE",
+    availability: "Disponível",
+    description: "Descrição curta para apresentar este produto.",
+    image: "assets/products/produto-06.png",
+    accent: "green"
+  },
+  {
+    name: "Produto 07",
+    category: "Seleção Sheila",
+    presentation: "Apresentação 07",
+    specification: "Especificação do produto",
+    price: "R$ 0.000,00",
+    oldPrice: "",
+    installment: "Condições confirmadas no atendimento",
+    rating: "5,0",
+    reviews: "112 avaliações",
+    badge: "EXCLUSIVO",
+    availability: "Disponível",
+    description: "Descrição curta para apresentar este produto.",
+    image: "assets/products/produto-07.png",
+    accent: "green"
+  },
+  {
+    name: "Produto 08",
+    category: "Seleção Sheila",
+    presentation: "Apresentação 08",
+    specification: "Especificação do produto",
+    price: "R$ 0.000,00",
+    oldPrice: "",
+    installment: "Condições confirmadas no atendimento",
+    rating: "4,9",
+    reviews: "103 avaliações",
+    badge: "SELEÇÃO",
+    availability: "Disponível",
+    description: "Descrição curta para apresentar este produto.",
+    image: "assets/products/produto-08.png",
+    accent: "green"
+  },
+  {
+    name: "Produto 09",
+    category: "Seleção Sheila",
+    presentation: "Apresentação 09",
+    specification: "Especificação do produto",
+    price: "R$ 0.000,00",
+    oldPrice: "",
+    installment: "Condições confirmadas no atendimento",
+    rating: "4,8",
+    reviews: "81 avaliações",
+    badge: "DESTAQUE",
+    availability: "Disponível",
+    description: "Descrição curta para apresentar este produto.",
+    image: "assets/products/produto-09.png",
+    accent: "green"
+  },
+  {
+    name: "Produto 10",
+    category: "Seleção Sheila",
+    presentation: "Apresentação 10",
+    specification: "Especificação do produto",
+    price: "R$ 0.000,00",
+    oldPrice: "",
+    installment: "Condições confirmadas no atendimento",
+    rating: "5,0",
+    reviews: "140 avaliações",
+    badge: "EXCLUSIVO",
+    availability: "Disponível",
+    description: "Descrição curta para apresentar este produto.",
+    image: "assets/products/produto-10.png",
     accent: "green"
   }
 ];
