@@ -2208,3 +2208,192 @@ body{
     line-height:1.45!important;
   }
 }
+
+
+/* ==========================================================
+   V25 — CTA PRIVADA APÓS OS PRODUTOS + RODAPÉ RESTAURADO
+   ========================================================== */
+
+/* Remove estilos extras que tinham sido aplicados ao rodapé na V24. */
+.footer-brand h3{
+  display:none!important;
+}
+
+.footer-brand p{
+  max-width:420px!important;
+  margin-top:14px!important;
+  color:rgba(255,255,255,.48)!important;
+  font-size:13px!important;
+  line-height:1.65!important;
+}
+
+/* Nova seção logo abaixo dos produtos. */
+.private-cta-section{
+  position:relative;
+  overflow:hidden;
+  padding:110px 5vw 118px;
+  background:
+    radial-gradient(circle at 50% 0,rgba(64,231,158,.17),transparent 32%),
+    radial-gradient(circle at 16% 70%,rgba(15,112,72,.11),transparent 24%),
+    linear-gradient(180deg,#050705 0%,#071009 100%);
+  border-top:1px solid rgba(89,233,169,.10);
+  border-bottom:1px solid rgba(89,233,169,.10);
+}
+
+.private-cta-section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(74,223,156,.022) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(74,223,156,.022) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.62),transparent 84%);
+}
+
+.private-cta-glow{
+  position:absolute;
+  left:50%;
+  top:-130px;
+  width:780px;
+  height:330px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:radial-gradient(ellipse,rgba(62,229,155,.26),transparent 68%);
+  filter:blur(48px);
+  pointer-events:none;
+}
+
+.private-cta-inner{
+  position:relative;
+  z-index:2;
+  max-width:980px;
+  margin:0 auto;
+  text-align:center;
+}
+
+.private-cta-kicker{
+  display:block;
+  margin-bottom:22px;
+  color:#48e19b;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  text-shadow:0 0 18px rgba(72,225,155,.24);
+}
+
+.private-cta-inner h2{
+  margin:0 auto;
+  max-width:940px;
+  color:#f7fff9;
+  font-family:"DM Sans",sans-serif;
+  font-size:clamp(46px,6.4vw,88px);
+  font-weight:500;
+  line-height:.94;
+  letter-spacing:-.06em;
+}
+
+.private-cta-inner h2 em{
+  display:inline-block;
+  margin-top:6px;
+  color:#95ebbe;
+  font-family:"Playfair Display",serif;
+  font-weight:600;
+  font-style:italic;
+  letter-spacing:-.04em;
+}
+
+.private-cta-inner p{
+  max-width:690px;
+  margin:28px auto 0;
+  color:rgba(255,255,255,.58);
+  font-size:15px;
+  line-height:1.75;
+}
+
+.private-cta-button{
+  position:relative;
+  overflow:hidden;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  min-height:58px;
+  margin-top:38px;
+  padding:0 28px;
+  border-radius:18px;
+  color:#031009;
+  text-decoration:none;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  background:linear-gradient(135deg,#0c6f49,#45e39d);
+  box-shadow:
+    0 18px 42px rgba(22,155,104,.28),
+    0 0 28px rgba(67,229,159,.11),
+    inset 0 1px 0 rgba(255,255,255,.24);
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+
+.private-cta-button::after{
+  content:"";
+  position:absolute;
+  top:-40%;
+  left:-45%;
+  width:34%;
+  height:180%;
+  transform:rotate(18deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.30),transparent);
+  animation:privateCtaShine 4.2s ease-in-out infinite;
+  pointer-events:none;
+}
+
+.private-cta-button:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 24px 52px rgba(22,155,104,.34),
+    0 0 36px rgba(67,229,159,.16),
+    inset 0 1px 0 rgba(255,255,255,.28);
+}
+
+@keyframes privateCtaShine{
+  0%,60%{left:-45%;opacity:0}
+  68%{opacity:1}
+  84%,100%{left:118%;opacity:0}
+}
+
+@media(max-width:900px){
+  .footer-brand p{
+    max-width:180px!important;
+    font-size:9px!important;
+    line-height:1.45!important;
+  }
+
+  .private-cta-section{
+    padding:82px 20px 88px;
+  }
+
+  .private-cta-inner h2{
+    font-size:clamp(40px,11vw,62px);
+  }
+
+  .private-cta-inner p{
+    max-width:90%;
+    font-size:14px;
+  }
+
+  .private-cta-button{
+    width:min(100%,330px);
+    min-height:56px;
+    padding:0 20px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .private-cta-button::after{
+    animation:none!important;
+  }
+}
