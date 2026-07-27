@@ -15,18 +15,20 @@ window.SITE_CONFIG = {
 
 window.PRODUCTS = [
   {
-    name: "Produto 01",
+    name: "T.G. (Tirzepatida) ampola",
     category: "Seleção Sheila",
     presentation: "Caixa com 1 unidade",
-    specification: "Apresentação individual",
-    price: "R$ 0.000,00",
+    specification: "Caixa com 4 unidades",
+    price: "R$ 350,00",
     oldPrice: "",
-    installment: "Condições confirmadas no atendimento",
+    installment: "R$ 400,00 no pix ou cartão de crédito",
     rating: "4,9",
     reviews: "128 avaliações",
     badge: "MAIS ESCOLHIDO",
     availability: "Disponível",
-    description: "Descrição curta e objetiva para apresentar o produto com elegância.",
+    description: "TG CAIXA FECHADA 
+      R$ 1200,00 pagamento no dinheiro 
+R$ 1300,00 no pix ou cartão de crédito (parcelado em até 18x com acréscimo da maquina)",
     image: "assets/products/produto-01.png",
     accent: "green"
   },
